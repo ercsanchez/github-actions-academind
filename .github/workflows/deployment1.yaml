@@ -1,10 +1,6 @@
-name: Practice - Deploy Project (Workflow 1A)
-# deploy using only 1 job
-
-on: [push]
-
+name: Deployment Exercise 1
+on: push
 jobs:
-
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -12,11 +8,11 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
-      - name: Lint code
+      - name: Lint
         run: npm run lint
       - name: Test code
         run: npm run test
-      - name: Build project
+      - name: Build code
         run: npm run build
-      - name: Deploy project
+      - name: Deploy code
         run: echo "Deploying..."
