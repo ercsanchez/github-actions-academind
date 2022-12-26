@@ -1,6 +1,6 @@
 name: Deploy Project Workflow
 
-on: push
+on: [workflow_dispatch, push]
 
 jobs:
 
