@@ -1,14 +1,10 @@
-name: 4-Exercise - Workflow1
+name: Deploy website
 on:
   push:
     branches:
       - main
-      - 'dev-*'
-      - 'dev/**'
-    paths-ignore:
-      - '.github/workflows/*'
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -19,7 +15,19 @@ jobs:
         run: npm run lint
       - name: Test code
         run: npm run test
-      - name: Build
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Build website
         run: npm run build
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy
         run: echo "Deploying..."
