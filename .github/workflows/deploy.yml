@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - dev
+      - dev/**
 env:    # defined on workflow-level
   MONGODB_DB_NAME: gha-demo
 jobs:
