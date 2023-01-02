@@ -78,3 +78,11 @@ jobs:
         run: ls
       - name: Deploy
         run: echo "Deploying..."
+  report:   # runs in parallel to all jobs and will be evaluated immediately at the start of workflow run
+    if: failure()    # will not evaluate to true even if other jobs failed since not dependent on other jobs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: |
+          echo "Something went wrong"
+          echo " ${{ github }}"
