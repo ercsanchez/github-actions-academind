@@ -37,7 +37,9 @@ jobs:
         run: npm run test
         # Test report tonly generated if Test step fails
       - name: Upload test report
-        if: ${{ steps.run-tests.outcome == 'failure' }}   # ${{}} - expressions syntax can be omitted for "if" field
+        if: ${{ failure() && steps.run-tests.outcome == 'failure' }}   # ${{}} - expressions syntax can be omitted for "if" field
+        # failure() function needed to prompt github actions to execute this step if any of the steps fail
+        # ${{ steps.run-tests.outcome == 'failure' }} will ensure this step runs only if step: Test code fails
         uses: actions/upload-artifact@v3
         with:
           name: test-report
