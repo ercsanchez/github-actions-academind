@@ -72,6 +72,8 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/reusable.yml  # relative path from project root | do not enclose path in quotes ''
+    with:
+      artifact-name: dist-files
   report:
     needs: [lint, deploy]    # no need to create dependency to test and build | deploy is the last job for test-build-deploy sequence
     if: failure()
