@@ -71,16 +71,7 @@ jobs:
           path: dist
   deploy:
     needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: dist-files
-      - name: Output contents
-        run: ls
-      - name: Deploy
-        run: echo "Deploying..."
+    uses: ./.github/workflows/reusable.yml  # relative path from project root
   report:
     needs: [lint, deploy]    # no need to create dependency to test and build | deploy is the last job for test-build-deploy sequence
     if: failure()
