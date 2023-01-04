@@ -76,6 +76,12 @@ jobs:
       artifact-name: dist-files
     # secrets:
     #   some-secret: ${{ secrets.SECRET_KEY }}
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print deploy job output
+        run: echo "${{ needs.deploy.outputs.result }}"
   report:
     needs: [lint, deploy]    # no need to create dependency to test and build | deploy is the last job for test-build-deploy sequence
     if: failure()
